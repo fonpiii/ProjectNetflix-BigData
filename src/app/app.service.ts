@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +32,35 @@ export class AppService {
         ref.orderByChild(type).equalTo(key)
       )
       .snapshotChanges();
+  }
+
+  GetSexAll(): any {
+    const sexs = [];
+    this.db.list('/Sex').snapshotChanges().subscribe((data) => {
+      data.forEach((element) => {
+        sexs.push(element.payload.val());
+      });
+    });
+    return sexs;
+  }
+
+  GetCategoryAll(): any {
+    const categorys = [];
+    this.db.list('/Category').snapshotChanges().subscribe((data) => {
+      data.forEach((element) => {
+        categorys.push(element.payload.val());
+      });
+    });
+    return categorys;
+  }
+
+  GetMovieByCategory(type: string): any {
+    const movies = [];
+    this.db.list('/' + type).snapshotChanges().subscribe((data) => {
+      data.forEach((element) => {
+        movies.push(element.payload.val());
+      });
+    });
+    return movies;
   }
 }

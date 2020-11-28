@@ -6,6 +6,8 @@ import { firebaseConfig } from './../environments/firebase.config';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +17,8 @@ import { AppComponent } from './app.component';
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
