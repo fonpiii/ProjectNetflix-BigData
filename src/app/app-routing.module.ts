@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { RecommenderComponent } from './Recommender/recommender.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
-  { path: '', component: AppComponent  }
+  { path: '', component: HomeComponent  },
+  { path: 'Recommender', component: RecommenderComponent },
+  { path: 'Home', component: HomeComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,37 @@
+<router-outlet>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-sm-3 mb-2 mt-2"
+          *ngFor="let item of moviesRecommender.data; index as i"
+        >
+          <!-- <div class="alert alert-primary" role="alert">
+                          {{user.title}}
+                        </div> -->
+          <div class="card mb-4">
+            <!--Card image-->
+            <div class="view overlay">
+              <img
+                class="card-img-top"
+                src="assets/movies/{{item.title}}.jpg"
+                width="300px"
+                height="300px"
+                alt="Card image cap"
+              />
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+              <!--Title-->
+              <h6 class="card-title">{{item.title}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</router-outlet>

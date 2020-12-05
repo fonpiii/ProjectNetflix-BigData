@@ -8,9 +8,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { HttpClientModule } from '@angular/common/http';
+import { RecommenderComponent } from './Recommender/recommender.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RecommenderComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,7 +21,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     NgxChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

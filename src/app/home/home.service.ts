@@ -1,15 +1,36 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class AppService {
+export class HomeService {
   private itemsRef = this.db.list('MasterData');
   private datas: Observable<any>;
+  private readonly URL = 'https://cnn-api.herokuapp.com/';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
 
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private db: AngularFireDatabase,
+              private http: HttpClient) {}
+
+  async getMoviesByCollaborativeFiltering(): Promise<any> {
+    let response: any = null;
+
+    try{
+      const url = this.URL + 'get_movies/';
+      response = await this.http.get<any>(url, this.httpOptions).toPromise();
+    } catch (eror) {
+      console.log('Eror', eror);
+    }
+    return response;
+  }
 
   pushMasterData(obj: any) {
     this.itemsRef.push(obj);
