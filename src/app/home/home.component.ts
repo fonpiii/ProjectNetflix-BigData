@@ -59,7 +59,8 @@ export class HomeComponent implements OnInit {
     Level3: '',
     Level4: '',
   };
-  // options
+
+  // options chart
   gradient = false;
   showLegend = true;
   showLabels = true;
@@ -85,13 +86,14 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(
-    private db: AngularFireDatabase,
     private homeService: HomeService,
     private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
+    // Show spinner on load page
     this.spinner.show();
+
     // Get all
     this.homeService.GetMasterData().subscribe((data) => {
       data.forEach((element) => {
@@ -107,16 +109,20 @@ export class HomeComponent implements OnInit {
       data.forEach((element) => {
         this.category.push(element.payload.val());
       });
+
+      // Hide spinner on load page success
       this.spinner.hide();
     });
   }
 
+  // On click image student
   imageStudentOnClick(studentType: string) {
     this.setDefaults();
     this.studentType = studentType;
     this.getDataBySex(studentType);
   }
 
+  // On select type chart by type
   onSelect(data): void {
     if (this.currentStepBreadcrumb === 'Sex') {
       this.getDataByCategory(data);
@@ -126,13 +132,14 @@ export class HomeComponent implements OnInit {
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    // console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
+  // Get data type = sex and show chart
   getDataBySex(studentType: string) {
     const tempResult = [];
     this.currentStepBreadcrumb = 'Sex';
@@ -152,6 +159,7 @@ export class HomeComponent implements OnInit {
     this.results = tempResult;
   }
 
+  // Get data type = category and show chart
   getDataByCategory(data) {
     if (data.name) {
       this.breadcrumbLevel.Level1 = data.name;
@@ -210,6 +218,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Get data type = interest(Like) and show chart
   getDataByInterest(data) {
     if (data.name) {
       this.breadcrumbLevel.Level2 = data.name;
@@ -288,6 +297,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Set movie on show chart
   setMoviesByCategory(category: any) {
     const tempResult = [];
     category.forEach((currentValue, index) => {
@@ -301,6 +311,7 @@ export class HomeComponent implements OnInit {
     this.results = tempResult;
   }
 
+  // Set data to default and clear data
   setDefaults() {
     this.results = [];
     this.tempDatas = [];

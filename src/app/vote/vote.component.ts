@@ -31,7 +31,7 @@ import {
   Movies,
 } from './../../shared/const';
 
-export interface Chart {
+export interface BarChart {
   name: string;
   series: [
     {
@@ -122,7 +122,7 @@ export class VoteComponent implements OnInit {
         if (listMovie.length > 0) {
           const tempMovie = [];
           listMovie[0].forEach((element, index) => {
-            const objMovie: Chart = {
+            const objMovie: BarChart = {
               name: element.Name,
               series: [
                 {

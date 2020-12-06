@@ -20,7 +20,8 @@
         <div class="col-sm-12 text-center">
           <h4 style="color: white">
             โดยคิดคำนวณจาก Collaborative Filtering โดยสนใจ 2 ปัจจัยคือหนัง
-            และประเภทหนังมาคำนวณจะได้หนังที่ Match กับ 420 คนที่ได้ทำการสำรวจ โดยได้ผลดังนี้
+            และประเภทหนังมาคำนวณจะได้หนังที่ Match กับ 420 คนที่ได้ทำการสำรวจ
+            โดยได้ผลดังนี้
           </h4>
         </div>
       </div>
@@ -50,7 +51,13 @@
             <!--Card content-->
             <div class="card-body">
               <!--Title-->
-              <h6 class="card-title text-center">{{ item.title }}</h6>
+              <h6
+                class="card-title text-center"
+                (click)="clickToLink(item.title)"
+                style="cursor: pointer;"
+              >
+                {{ item.title }}
+              </h6>
             </div>
           </div>
         </div>
