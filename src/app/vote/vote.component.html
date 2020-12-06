@@ -57,14 +57,14 @@
             <div class="card-body">
               <h6 class="card-title">
                 <img
-                  src="../../assets/images/Icon/{{item}}.png"
+                  src="assets/images/{{ item }}.png"
                   width="60px"
                   height="60px"
                   alt=""
                   class="mr-1"
                 />
               </h6>
-              {{item}}
+              {{ item }}
               <div class="row">
                 <!-- <div class="col-sm-8 float-left">
                   <p>จำนวนการโหวต:</p>
@@ -141,7 +141,11 @@
                           'badge-success':
                             item.Status == 'Like' && item.Status != 'DisLike'
                         }"
-                        >Like</span
+                        ><img
+                          class="card-img-top icon-like"
+                          src="assets/images/like.png"
+                          alt="Card image cap"
+                        />Like</span
                       >
                       <span
                         id="{{ item.Name }}_Dis"
@@ -154,7 +158,11 @@
                           'badge-danger':
                             item.Status == 'DisLike' && item.Status != 'Like'
                         }"
-                        >Dislike</span
+                        ><img
+                          class="card-img-top icon-like"
+                          src="assets/images/dislike.png"
+                          alt="Card image cap"
+                        />Dislike</span
                       >
                     </div>
                   </div>

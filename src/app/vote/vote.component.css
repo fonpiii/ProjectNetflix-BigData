@@ -3,6 +3,17 @@ h1 {
   font-weight: bold;
 }
 
+span {
+  padding: 4px !important;
+}
+
+.icon-like {
+  height: 20px;
+  width: 20px;
+  margin-right: 2px;
+  margin-bottom: 9px;
+}
+
 body {
   height: auto;
   background-size: cover;
@@ -12,7 +23,7 @@ body {
 
 @font-face {
   font-family: myFirstFont;
-  src: url('../../assets/font/FC Marshmallow Regular.ttf');
+  src: url("../../assets/font/FC Marshmallow Regular.ttf");
 }
 
 * {
