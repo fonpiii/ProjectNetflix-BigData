@@ -11,9 +11,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { RecommenderComponent } from './Recommender/recommender.component';
 import { HomeComponent } from './home/home.component';
+import { VoteComponent } from './vote/vote.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-  declarations: [AppComponent, RecommenderComponent, HomeComponent],
+  declarations: [AppComponent, RecommenderComponent, HomeComponent, VoteComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,7 +24,8 @@ import { HomeComponent } from './home/home.component';
     AngularFireDatabaseModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

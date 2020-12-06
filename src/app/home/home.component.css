@@ -3,8 +3,18 @@ h1 {
   font-weight: bold;
 }
 
+@font-face {
+  font-family: myFirstFont;
+  src: url('../../assets/font/FC Marshmallow Regular.ttf');
+}
+
+* {
+  font-family: myFirstFont;
+  font-size: x-large !important;
+}
+
 body {
-  height: auto;
+  height: 550px;
   background-size: cover;
   width: auto;
   background-color: black;

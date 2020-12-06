@@ -1,6 +1,29 @@
 <router-outlet>
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-clip-rotate-pulse"
+    [fullScreen]="true"
+    ><p style="color: white">Loading...</p></ngx-spinner
+  >
   <body>
     <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center mt-2">
+          <h4 style="color: white">
+            ข้อมูลนี้มาจากการสำรวจผ่านทาง Google Form ทั้งหมด 420 คน
+          </h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h4 style="color: white">
+            โดยคิดคำนวณจาก Collaborative Filtering โดยสนใจ 2 ปัจจัยคือหนัง
+            และประเภทหนังมาคำนวณจะได้หนังที่ Match กับ 420 คนที่ได้ทำการสำรวจ โดยได้ผลดังนี้
+          </h4>
+        </div>
+      </div>
       <div class="row">
         <div
           class="col-sm-3 mb-2 mt-2"
@@ -14,7 +37,7 @@
             <div class="view overlay">
               <img
                 class="card-img-top"
-                src="assets/movies/{{item.title}}.jpg"
+                src="assets/movies/{{ item.title }}.jpg"
                 width="300px"
                 height="300px"
                 alt="Card image cap"
@@ -27,7 +50,7 @@
             <!--Card content-->
             <div class="card-body">
               <!--Title-->
-              <h6 class="card-title">{{item.title}}</h6>
+              <h6 class="card-title text-center">{{ item.title }}</h6>
             </div>
           </div>
         </div>

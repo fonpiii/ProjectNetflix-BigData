@@ -7,6 +7,7 @@ import { from, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HomeService {
+  items: Observable<any[]>;
   private itemsRef = this.db.list('MasterData');
   private datas: Observable<any>;
   private readonly URL = 'https://cnn-api.herokuapp.com/';
@@ -65,14 +66,9 @@ export class HomeService {
     return sexs;
   }
 
-  GetCategoryAll(): any {
+  GetCategoryAll(): Observable<any> {
     const categorys = [];
-    this.db.list('/Category').snapshotChanges().subscribe((data) => {
-      data.forEach((element) => {
-        categorys.push(element.payload.val());
-      });
-    });
-    return categorys;
+    return this.db.list('/Category').snapshotChanges();
   }
 
   GetMovieByCategory(type: string): any {

@@ -1,0 +1,179 @@
+<router-outlet>
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-clip-rotate-pulse"
+    [fullScreen]="true"
+    ><p style="color: white">Loading...</p></ngx-spinner
+  >
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="card mt-3 mb-3">
+          <div class="col-sm-12">
+            <ngx-charts-bar-vertical-2d
+              [view]="view"
+              [scheme]="colorScheme"
+              [results]="barChart"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [legendTitle]="legendTitle"
+              (select)="onSelect($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            >
+            </ngx-charts-bar-vertical-2d>
+          </div>
+          <div class="col-sm-12 dp-category">
+            <select
+              class="custom-select custom-select-sm"
+              [(ngModel)]="dpSelected"
+              (ngModelChange)="setBarChart(dpSelected, 'init')"
+            >
+              <option
+                *ngFor="let item of categorys"
+                [value]="item"
+                [attr.selected]="dpSelected == item ? true : null"
+              >
+                {{ item }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="col-sm-3 mb-2 mt-2 text-center"
+          *ngFor="let item of categorys; index as i"
+        >
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">
+                <img
+                  src="../../assets/images/Icon/{{item}}.png"
+                  width="60px"
+                  height="60px"
+                  alt=""
+                  class="mr-1"
+                />
+              </h6>
+              {{item}}
+              <div class="row">
+                <!-- <div class="col-sm-8 float-left">
+                  <p>จำนวนการโหวต:</p>
+                </div>
+                <div class="col-sm-4 float-right">
+                  <p>1</p>
+                </div> -->
+              </div>
+              <button
+                data-toggle="modal"
+                data-target="#modalChart"
+                class="btn btn-sm btn-info ml-2"
+                (click)="onClickVote(item)"
+              >
+                Vote
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="modalChart"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="padding: 7px">
+            <h5 class="modal-title" id="exampleModalLongTitle">รายละเอียด</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!--Profile Card 5-->
+            <div class="row justify-content-center">
+              <div
+                class="col-md-4 mt-4"
+                *ngFor="let item of listMovie[0]; index as i"
+              >
+                <div class="card profile-card-5" style="height: 95%">
+                  <div class="card-img-block">
+                    <img
+                      class="card-img-top"
+                      src="assets/movies/{{ item.Img }}"
+                      alt="Card image cap"
+                    />
+                  </div>
+                  <div class="card-body pt-0">
+                    <h5 class="card-title text-center">{{ item.Name }}</h5>
+                    <!-- <p class="card-text">
+                      -
+                    </p> -->
+                    <div>
+                      <span
+                        id="{{ item.Name }}_Like"
+                        (click)="onClickLike(item)"
+                        class="badge mr-2"
+                        ng-model="item.Status"
+                        [ngClass]="{
+                          'badge-secondary':
+                            item.Status == 'None' || item.Status == 'DisLike',
+                          'badge-success':
+                            item.Status == 'Like' && item.Status != 'DisLike'
+                        }"
+                        >Like</span
+                      >
+                      <span
+                        id="{{ item.Name }}_Dis"
+                        (click)="onClickDisLike(item)"
+                        class="badge mr-2"
+                        ng-model="item.Status"
+                        [ngClass]="{
+                          'badge-secondary':
+                            item.Status == 'None' || item.Status == 'Like',
+                          'badge-danger':
+                            item.Status == 'DisLike' && item.Status != 'Like'
+                        }"
+                        >Dislike</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <div class="row justify-content-center mt-3">
+              <div class="col-sm-2">
+                <button type="button" class="btn btn-primary">Submit</button>
+              </div>
+            </div> -->
+            <button type="button" (click)="onSubmit()" class="btn btn-primary">
+              โหวต
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</router-outlet>

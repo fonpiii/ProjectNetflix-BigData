@@ -1,20 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { RecommenderService } from '../Recommender/recommender.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-recommender',
   templateUrl: './recommender.component.html',
-  styleUrls: ['./recommender.component.css']
+  styleUrls: ['./recommender.component.css'],
 })
 export class RecommenderComponent implements OnInit {
   public moviesRecommender: any = {};
 
-  constructor(private recommenderService: RecommenderService) { }
+  constructor(
+    private recommenderService: RecommenderService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   async ngOnInit() {
     // Get movies model
-    console.log(await this.recommenderService.getMoviesByCollaborativeFiltering());
-    this.moviesRecommender = await this.recommenderService.getMoviesByCollaborativeFiltering();
+    // console.log(
+    //   await this.recommenderService.getMoviesByCollaborativeFiltering()
+    // );
+    this.spinner.show();
+    await this.recommenderService
+      .getMoviesByCollaborativeFiltering()
+      .then((data) => {
+        this.moviesRecommender = data;
+        this.spinner.hide();
+      });
   }
 
   getImage(fileName: any): string {
@@ -27,5 +39,4 @@ export class RecommenderComponent implements OnInit {
     }
     return result;
   }
-
 }

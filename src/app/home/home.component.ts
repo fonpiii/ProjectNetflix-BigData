@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { HomeService } from './home.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxSpinnerService } from 'ngx-spinner';
 import {
   Const,
   InterestType,
@@ -40,10 +41,9 @@ export interface Chart {
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
   public results: Chart[] = [];
   public datas: any[] = [];
   public tempDatas: any[] = [];
@@ -86,10 +86,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private db: AngularFireDatabase,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private spinner: NgxSpinnerService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.spinner.show();
     // Get all
     this.homeService.GetMasterData().subscribe((data) => {
       data.forEach((element) => {
@@ -101,10 +103,12 @@ export class HomeComponent implements OnInit {
     this.sexs = this.homeService.GetSexAll();
 
     // Get category
-    this.category = this.homeService.GetCategoryAll();
-
-    // Get movies model
-    console.log(await this.homeService.getMoviesByCollaborativeFiltering());
+    this.homeService.GetCategoryAll().subscribe((data) => {
+      data.forEach((element) => {
+        this.category.push(element.payload.val());
+      });
+      this.spinner.hide();
+    });
   }
 
   imageStudentOnClick(studentType: string) {
@@ -310,5 +314,4 @@ export class HomeComponent implements OnInit {
     this.breadcrumbLevel.Level3 = '';
     this.breadcrumbLevel.Level4 = '';
   }
-
 }
